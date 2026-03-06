@@ -1,0 +1,22 @@
+{
+  "config_name": "vs200_mc5_ep50",
+  "vector_size": 200,
+  "min_count": 5,
+  "epochs": 50,
+  "num_documents": 4986,
+  "num_clusters": 8,
+  "silhouette_cosine": 0.36185556650161743,
+  "calinski_harabasz": 98.01536579494979,
+  "davies_bouldin": 1.015269772629385,
+  "subreddit_purity": 0.2170076213397513,
+  "cluster_sizes": {
+    "0": 51,
+    "1": 4814,
+    "2": 26,
+    "3": 61,
+    "4": 12,
+    "5": 1,
+    "6": 1,
+    "7": 20
+  }
+}

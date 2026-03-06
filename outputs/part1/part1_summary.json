@@ -1,0 +1,175 @@
+{
+  "part": "Part 1 - Doc2Vec Embeddings and Cosine Clustering",
+  "num_documents_used": 4986,
+  "clusters": 8,
+  "configs_tested": [
+    {
+      "name": "vs50_mc2_ep30",
+      "vector_size": 50,
+      "min_count": 2,
+      "epochs": 30
+    },
+    {
+      "name": "vs100_mc3_ep40",
+      "vector_size": 100,
+      "min_count": 3,
+      "epochs": 40
+    },
+    {
+      "name": "vs200_mc5_ep50",
+      "vector_size": 200,
+      "min_count": 5,
+      "epochs": 50
+    }
+  ],
+  "results": [
+    {
+      "config_name": "vs50_mc2_ep30",
+      "vector_size": 50,
+      "min_count": 2,
+      "epochs": 30,
+      "num_documents": 4986,
+      "num_clusters": 8,
+      "silhouette_cosine": 0.6570720672607422,
+      "calinski_harabasz": 442.78453440332504,
+      "davies_bouldin": 1.2683293130699775,
+      "subreddit_purity": 0.23606097071801044,
+      "cluster_sizes": {
+        "0": 23,
+        "1": 3,
+        "2": 259,
+        "3": 1,
+        "4": 196,
+        "5": 1,
+        "6": 4502,
+        "7": 1
+      }
+    },
+    {
+      "config_name": "vs100_mc3_ep40",
+      "vector_size": 100,
+      "min_count": 3,
+      "epochs": 40,
+      "num_documents": 4986,
+      "num_clusters": 8,
+      "silhouette_cosine": 0.4826301634311676,
+      "calinski_harabasz": 250.96947984957697,
+      "davies_bouldin": 1.080690797751675,
+      "subreddit_purity": 0.23786602486963498,
+      "cluster_sizes": {
+        "0": 4633,
+        "1": 123,
+        "2": 172,
+        "3": 3,
+        "4": 1,
+        "5": 3,
+        "6": 1,
+        "7": 50
+      }
+    },
+    {
+      "config_name": "vs200_mc5_ep50",
+      "vector_size": 200,
+      "min_count": 5,
+      "epochs": 50,
+      "num_documents": 4986,
+      "num_clusters": 8,
+      "silhouette_cosine": 0.36185556650161743,
+      "calinski_harabasz": 98.01536579494979,
+      "davies_bouldin": 1.015269772629385,
+      "subreddit_purity": 0.2170076213397513,
+      "cluster_sizes": {
+        "0": 51,
+        "1": 4814,
+        "2": 26,
+        "3": 61,
+        "4": 12,
+        "5": 1,
+        "6": 1,
+        "7": 20
+      }
+    }
+  ],
+  "best_configuration": "vs50_mc2_ep30",
+  "selection_reason": "Highest cosine silhouette score (with purity and Davies-Bouldin as tie-breakers).",
+  "comparison_table": [
+    {
+      "config_name": "vs50_mc2_ep30",
+      "vector_size": 50,
+      "min_count": 2,
+      "epochs": 30,
+      "num_documents": 4986,
+      "num_clusters": 8,
+      "silhouette_cosine": 0.6570720672607422,
+      "calinski_harabasz": 442.78453440332504,
+      "davies_bouldin": 1.2683293130699775,
+      "subreddit_purity": 0.23606097071801044,
+      "cluster_sizes": {
+        "0": 23,
+        "1": 3,
+        "2": 259,
+        "3": 1,
+        "4": 196,
+        "5": 1,
+        "6": 4502,
+        "7": 1
+      },
+      "rank_silhouette": 1.0,
+      "rank_db": 3.0,
+      "rank_purity": 2.0,
+      "aggregate_rank_score": 6.0
+    },
+    {
+      "config_name": "vs100_mc3_ep40",
+      "vector_size": 100,
+      "min_count": 3,
+      "epochs": 40,
+      "num_documents": 4986,
+      "num_clusters": 8,
+      "silhouette_cosine": 0.4826301634311676,
+      "calinski_harabasz": 250.96947984957697,
+      "davies_bouldin": 1.080690797751675,
+      "subreddit_purity": 0.23786602486963498,
+      "cluster_sizes": {
+        "0": 4633,
+        "1": 123,
+        "2": 172,
+        "3": 3,
+        "4": 1,
+        "5": 3,
+        "6": 1,
+        "7": 50
+      },
+      "rank_silhouette": 2.0,
+      "rank_db": 2.0,
+      "rank_purity": 1.0,
+      "aggregate_rank_score": 5.0
+    },
+    {
+      "config_name": "vs200_mc5_ep50",
+      "vector_size": 200,
+      "min_count": 5,
+      "epochs": 50,
+      "num_documents": 4986,
+      "num_clusters": 8,
+      "silhouette_cosine": 0.36185556650161743,
+      "calinski_harabasz": 98.01536579494979,
+      "davies_bouldin": 1.015269772629385,
+      "subreddit_purity": 0.2170076213397513,
+      "cluster_sizes": {
+        "0": 51,
+        "1": 4814,
+        "2": 26,
+        "3": 61,
+        "4": 12,
+        "5": 1,
+        "6": 1,
+        "7": 20
+      },
+      "rank_silhouette": 3.0,
+      "rank_db": 1.0,
+      "rank_purity": 3.0,
+      "aggregate_rank_score": 7.0
+    }
+  ]
+}
