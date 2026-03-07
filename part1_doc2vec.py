@@ -29,6 +29,7 @@ STOPWORDS = set(ENGLISH_STOP_WORDS)
 
 # Three distinct configurations requested in Part 1.
 DOC2VEC_CONFIGS = [
+    {"name": "vs50_mc2_ep3", "vector_size": 3, "min_count": 2, "epochs": 5},
     {"name": "vs50_mc2_ep30", "vector_size": 50, "min_count": 2, "epochs": 30},
     {"name": "vs100_mc3_ep40", "vector_size": 100, "min_count": 3, "epochs": 40},
     {"name": "vs200_mc5_ep50", "vector_size": 200, "min_count": 5, "epochs": 50},

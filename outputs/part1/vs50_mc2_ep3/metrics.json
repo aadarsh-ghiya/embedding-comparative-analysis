@@ -1,0 +1,22 @@
+{
+  "config_name": "vs50_mc2_ep3",
+  "vector_size": 3,
+  "min_count": 2,
+  "epochs": 5,
+  "num_documents": 4986,
+  "num_clusters": 8,
+  "silhouette_cosine": 0.39264827966690063,
+  "calinski_harabasz": 1610.4608154296875,
+  "davies_bouldin": 0.9661714979142209,
+  "subreddit_purity": 0.2601283594063378,
+  "cluster_sizes": {
+    "0": 451,
+    "1": 230,
+    "2": 641,
+    "3": 232,
+    "4": 314,
+    "5": 782,
+    "6": 2253,
+    "7": 83
+  }
+}

@@ -220,3 +220,34 @@ To match dimensionality:
 ### **Conclusion**
 At **3 dimensions**, BoW‑Bins (K=3) outperforms Doc2Vec‑3D across all metrics.  
 However, Doc2Vec becomes superior at higher dimensions (50D, 100D, 200D).
+
+## Part 3 - Comparative Analysis (README)
+**Overview**
+Part 3 provides a critical comparison between the two embedding methods used in this lab:
+- Doc2Vec (Part 1)
+- Word2Vec + Bag‑of‑Word‑Bins (BoW‑Bins) (Part 2)
+Both methods were evaluated using multiple dimensions/bins to understand how they behave as the representation size increases.
+
+1. Evaluation Methods Used
+To compare the two embedding approaches, we used four clustering quality metrics:
+- Silhouette Score (cosine) - measures how well clusters are separated
+- Davies–Bouldin Index - measures cluster compactness
+- Calinski–Harabasz Score - measures between‑cluster vs within‑cluster variance
+- Subreddit Purity - measures how well clusters align with subreddit labels
+These metrics were chosen because they capture both geometric structure (silhouette, DBI, CH) and semantic grouping (purity), giving a balanced evaluation of embedding quality.
+
+2. Dimension‑Matched Comparison (3D vs K=3)
+To ensure a fair comparison, both methods were evaluated at 3 dimensions:
+- Doc2Vec --> vector_size = 3
+- BoW‑Bins --> K = 3
+Result:
+BoW‑Bins (K=3) outperformed Doc2Vec‑3D across all metrics.
+Doc2Vec becomes too compressed at 3 dimensions, while BoW‑Bins retains enough distributional information to form clearer clusters.
+
+3. Behavior Across Higher Dimensions
+- Doc2Vec improves significantly at moderate dimensions (50D), producing the best overall structure and semantic grouping.
+- BoW‑Bins becomes more sparse and noisy as K increases (10, 30), improving purity but losing structural separation.
+
+4. Which Method Better Represents Meaning?
+- Doc2Vec is better at capturing semantic meaning when allowed higher dimensionality (50D).
+- BoW‑Bins is surprisingly strong at very low dimensions (3D) but does not model context or deeper semantics.
