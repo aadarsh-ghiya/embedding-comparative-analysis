@@ -209,8 +209,8 @@ Metrics are printed to the console:
 
 To match dimensionality:
 
-- **Doc2Vec → vector_size = 3**  
-- **BoW‑Bins → K = 3**
+- **Doc2Vec --> vector_size = 3**  
+- **BoW‑Bins --> K = 3**
 
 | Method | Dim | Silhouette ↑ | DBI ↓ | CH ↑ | Purity ↑ |
 |--------|------|--------------|--------|--------|-----------|
