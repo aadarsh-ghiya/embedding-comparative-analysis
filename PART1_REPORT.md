@@ -47,3 +47,174 @@ Reason: it gave the strongest cosine-based cluster separation among the three te
 ```bash
 python part1_doc2vec.py
 ```
+
+# Part 2: Word2Vec + Bag‑of‑Word‑Bins Embedding
+
+## **Overview**
+Part 2 implements an alternative document‑embedding method based on **Word2Vec** and **Bag‑of‑Word‑Bins (BoW‑Bins)**.  
+Instead of learning document vectors directly (as in Doc2Vec), this method:
+
+1. Trains a Word2Vec model on all tokens  
+2. Clusters word embeddings into **K semantic bins**  
+3. Converts each document into a **K‑dimensional normalized frequency vector**  
+4. Evaluates embedding quality using clustering metrics  
+
+This allows a direct comparison with Doc2Vec, especially at **3 dimensions**.
+
+---
+
+## **1. Setup Instructions**
+
+### **Create and activate a virtual environment**
+```bash
+python -m venv env
+```
+
+**Windows:**
+```bash
+env\Scripts\activate
+```
+
+**macOS/Linux:**
+```bash
+source env/bin/activate
+```
+
+### **Install dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+Or manually:
+```bash
+pip install gensim nltk numpy pandas scikit-learn tqdm
+```
+
+### **Download NLTK tokenizers**
+```bash
+python -c "import nltk; nltk.download('punkt')"
+```
+
+---
+
+## **2. Method Summary**
+
+### **2.1 Word2Vec Training**
+A Word2Vec model is trained on all cleaned Reddit posts from:
+
+- AskCulinary  
+- Baking  
+- Cooking  
+- FoodScience  
+- Recipes
+
+### Word2Vec Model 
+Binning and Embedding requires a trained Word2Vec model. This model is loaded directly to cluster word embeddings into K bins.
+ you must run:
+ ```
+python part1_doc2vec.py
+```
+to derive a model for binning and embedding, and the script automatically trains and saves:
+```
+data/embedding_data/word2vec/word2vec.model
+```
+This model provides dense word embeddings used for clustering.
+
+### **2.2 Clustering Word Embeddings**
+Word vectors are clustered into **K bins** using K‑Means:
+
+- **K = 3** (required for comparison with Doc2Vec‑3D)  
+- **K = 10**  
+- **K = 30**
+
+Each bin represents a semantic region of the vocabulary.
+
+### **2.3 Creating Document Vectors**
+For each document:
+
+1. Tokenize text  
+2. Assign each word to a bin  
+3. Count bin frequencies  
+4. Normalize by document length  
+
+This produces a **K‑dimensional embedding**.
+
+Example (K=3):
+```
+[0.6034, 0.3103, 0.0862]
+```
+
+---
+
+## **3. Running Binning and Embedding using the Word2Vec model**
+
+Run the script:
+
+```bash
+python part2_bow_bins.py
+```
+
+This will:
+
+- Load cleaned CSVs  
+- Load the trained Word2Vec model  
+- Generate BoW‑Bins embeddings for K = 3, 10, 30  
+- Compute clustering metrics  
+- Save outputs under `outputs/part2/`
+
+---
+
+## **4. Outputs Generated**
+
+For each K, the script produces:
+
+```
+outputs/part2/bow_bins_K3.csv
+outputs/part2/bow_bins_K10.csv
+outputs/part2/bow_bins_K30.csv
+```
+
+Each file contains:
+
+- Original document metadata  
+- K‑dimensional embedding columns (`bin_0`, `bin_1`, …)  
+
+Metrics are printed to the console:
+
+- Silhouette Score  
+- Davies–Bouldin Index  
+- Calinski–Harabasz Score  
+- Subreddit Purity  
+
+---
+
+## **5. Results Summary**
+
+| K | Silhouette ↑ | DBI ↓ | CH ↑ | Purity ↑ |
+|---|--------------|--------|--------|-----------|
+| **3** | **0.6263** | **0.5640** | **24651.83** | **0.4509** |
+| **10** | 0.3546 | 1.4700 | 1046.15 | 0.5427 |
+| **30** | 0.2179 | 2.2031 | 430.70 | 0.6280 |
+
+### **Interpretation**
+- **K = 3** gives the strongest structural clustering (best silhouette, DBI, CH).  
+- **K = 30** gives the highest purity but weaker separation.  
+- Increasing K increases granularity but reduces cluster compactness.
+
+---
+
+## **6. Comparison with Doc2Vec (3 Dimensions)**
+
+To match dimensionality:
+
+- **Doc2Vec → vector_size = 3**  
+- **BoW‑Bins → K = 3**
+
+| Method | Dim | Silhouette ↑ | DBI ↓ | CH ↑ | Purity ↑ |
+|--------|------|--------------|--------|--------|-----------|
+| Doc2Vec (3D) | 3 | 0.3926 | 0.9662 | 1610.46 | 0.2601 |
+| BoW‑Bins (K=3) | 3 | **0.6263** | **0.5640** | **24651.83** | **0.4509** |
+
+### **Conclusion**
+At **3 dimensions**, BoW‑Bins (K=3) outperforms Doc2Vec‑3D across all metrics.  
+However, Doc2Vec becomes superior at higher dimensions (50D, 100D, 200D).
