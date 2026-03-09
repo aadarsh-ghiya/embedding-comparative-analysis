@@ -221,7 +221,7 @@ To match dimensionality:
 At **3 dimensions**, BoW‑Bins (K=3) outperforms Doc2Vec‑3D across all metrics.  
 However, Doc2Vec becomes superior at higher dimensions (50D, 100D, 200D).
 
-## Part 3 - Comparative Analysis (README)
+## Part 3 - Comparative Analysis
 **Overview**
 Part 3 provides a critical comparison between the two embedding methods used in this lab:
 - Doc2Vec (Part 1)
