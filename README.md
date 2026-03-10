@@ -31,10 +31,10 @@ Total usable documents: **4,986**.
 - `vs50_mc2_ep30` gave the strongest cosine separation and the best Calinski-Harabasz score.
 - `vs100_mc3_ep40` and `vs200_mc5_ep50` improved Davies-Bouldin slightly but lost substantial silhouette separation.
 
-## Best configuration (Part 1 conclusion)
+## Best configuration
 Selected: **`vs50_mc2_ep30`**.
 
-Reason: it gave the strongest cosine-based cluster separation among the three tested Doc2Vec configurations while retaining similar subreddit purity.
+Reason: It gave the strongest cosine-based cluster separation among the three tested Doc2Vec configurations while retaining similar subreddit purity.
 
 ## Outputs generated
 - Full summary: `outputs/part1/part1_summary.json`
@@ -53,8 +53,8 @@ python part1_doc2vec.py
 # Part 2: Word2Vec + Bag‑of‑Word‑Bins Embedding
 
 ## **Overview**
-Part 2 implements an alternative document‑embedding method based on **Word2Vec** and **Bag‑of‑Word‑Bins (BoW‑Bins)**.  
-Instead of learning document vectors directly (as in Doc2Vec), this method:
+Here, we implement an alternative document‑embedding method based on **Word2Vec** and **Bag‑of‑Word‑Bins (BoW‑Bins)**.  
+Instead of learning document vectors directly, this method:
 
 1. Trains a Word2Vec model on all tokens  
 2. Clusters word embeddings into **K semantic bins**  
@@ -125,7 +125,7 @@ This model provides dense word embeddings used for clustering.
 ### **2.2 Clustering Word Embeddings**
 Word vectors are clustered into **K bins** using K‑Means:
 
-- **K = 3** (required for comparison with Doc2Vec‑3D)  
+- **K = 3**
 - **K = 10**  
 - **K = 30**
 
@@ -192,11 +192,11 @@ Metrics are printed to the console:
 
 ## **5. Results Summary**
 
-| K | Silhouette ↑ | DBI ↓ | CH ↑ | Purity ↑ |
-|---|--------------|--------|--------|-----------|
-| **3** | **0.6263** | **0.5640** | **24651.83** | **0.4509** |
+| K | Silhouette | DBI | CH | Purity |
+|---|----------|--------|--------|--------|
+| **3** | **0.6263** | **0.5640** | **24651.83** | 0.4509 |
 | **10** | 0.3546 | 1.4700 | 1046.15 | 0.5427 |
-| **30** | 0.2179 | 2.2031 | 430.70 | 0.6280 |
+| **30** | 0.2179 | 2.2031 | 430.70 | **0.6280** |
 
 ### **Interpretation**
 - **K = 3** gives the strongest structural clustering (best silhouette, DBI, CH).  
@@ -221,14 +221,11 @@ To match dimensionality:
 At **3 dimensions**, BoW‑Bins (K=3) outperforms Doc2Vec‑3D across all metrics.  
 However, Doc2Vec becomes superior at higher dimensions (50D, 100D, 200D).
 
-## Part 3 - Comparative Analysis
-**Overview**
-Part 3 provides a critical comparison between the two embedding methods used in this lab:
-- Doc2Vec (Part 1)
-- Word2Vec + Bag‑of‑Word‑Bins (BoW‑Bins) (Part 2)
+# Part 3 - Comparative Analysis
+
 Both methods were evaluated using multiple dimensions/bins to understand how they behave as the representation size increases.
 
-1. Evaluation Methods Used
+Evaluation Methods Used
 To compare the two embedding approaches, we used four clustering quality metrics:
 - Silhouette Score (cosine) - measures how well clusters are separated
 - Davies–Bouldin Index - measures cluster compactness
@@ -236,7 +233,7 @@ To compare the two embedding approaches, we used four clustering quality metrics
 - Subreddit Purity - measures how well clusters align with subreddit labels
 These metrics were chosen because they capture both geometric structure (silhouette, DBI, CH) and semantic grouping (purity), giving a balanced evaluation of embedding quality.
 
-2. Dimension‑Matched Comparison (3D vs K=3)
+Dimension‑Matched Comparison (3D vs K=3)
 To ensure a fair comparison, both methods were evaluated at 3 dimensions:
 - Doc2Vec --> vector_size = 3
 - BoW‑Bins --> K = 3
@@ -244,10 +241,10 @@ Result:
 BoW‑Bins (K=3) outperformed Doc2Vec‑3D across all metrics.
 Doc2Vec becomes too compressed at 3 dimensions, while BoW‑Bins retains enough distributional information to form clearer clusters.
 
-3. Behavior Across Higher Dimensions
+Behavior Across Higher Dimensions
 - Doc2Vec improves significantly at moderate dimensions (50D), producing the best overall structure and semantic grouping.
 - BoW‑Bins becomes more sparse and noisy as K increases (10, 30), improving purity but losing structural separation.
 
-4. Which Method Better Represents Meaning?
+Which Method Better Represents Meaning?
 - Doc2Vec is better at capturing semantic meaning when allowed higher dimensionality (50D).
 - BoW‑Bins is surprisingly strong at very low dimensions (3D) but does not model context or deeper semantics.
