@@ -27,7 +27,7 @@ from sklearn.preprocessing import normalize
 SEED = 42
 STOPWORDS = set(ENGLISH_STOP_WORDS)
 
-# Three distinct configurations requested in Part 1.
+# Three distinct configurations
 DOC2VEC_CONFIGS = [
     {"name": "vs50_mc2_ep3", "vector_size": 3, "min_count": 2, "epochs": 5},
     {"name": "vs50_mc2_ep30", "vector_size": 50, "min_count": 2, "epochs": 30},
@@ -110,7 +110,6 @@ def load_documents(input_dir: str) -> pd.DataFrame:
 
 
 def cluster_cosine(vectors: np.ndarray, n_clusters: int) -> np.ndarray:
-    # sklearn changed "affinity" -> "metric"; support both APIs.
     try:
         from sklearn.cluster import AgglomerativeClustering
 
